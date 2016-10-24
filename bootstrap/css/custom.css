@@ -1,0 +1,46 @@
+.biru {
+	color:#2957a4;
+}
+.merah {
+	color:#ed3237;
+}
+
+.logo1	{
+	color:#ed3237;
+	font-size:18px;
+	font-family: "Source Sans Pro",Arial,sans-serif;
+	font-weight: bold;
+}
+.logo2	{
+	color:#2957a4;
+	font-size:18px;
+	font-family: "Source Sans Pro",Arial,sans-serif;
+	font-weight: bold;
+}
+.hijau	{
+	color:#00a651;
+	font-size:18px;
+	font-family: "Source Sans Pro",Arial,sans-serif;
+	line-height:25px;
+	font-weight: bold;
+}
+
+.konten {
+	font-size :20px;
+	line-height:28px;
+	
+	
+}
+.titlekonten {
+	font-size :40px;
+	line-height:40px;
+	
+}
+@media print {
+
+  a[href]:after {
+
+    content: none !important;
+
+  }
+  
