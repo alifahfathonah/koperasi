@@ -55,12 +55,23 @@
                     }   
                 );
             });
-                $(document).on('click','.add-harga',function(e){
+            $(document).on('click','.approve-pengajuan',function(e){
                 e.preventDefault();
-                $("#modal-harga").modal('show');
-                 $(".modal-title").html('TAMBAH HARGA');
-                $.get("view/harga/harga_form.php",
-                {id_mat:$(this).attr('data-id')},
+                $("#modal-approve-pengajuan").modal('show');
+                 $(".modal-title").html('APPROVE PENGAJUAN');
+                 $.get("view/pinjaman/approve.php",
+                {id_pin:$(this).attr('data-id')},
+                 function(html){
+                        $(".modal-body").html(html);
+                    }   
+                );
+            });
+                $(document).on('click','.add-angsuran',function(e){
+                e.preventDefault();
+                $("#modal-add-angsuran").modal('show');
+                 $(".modal-title").html('FORM ANGSURAN');
+                $.get("view/angsuran/angsuran_form.php",
+                {id_pin:$(this).attr('data-id')},
                  function(html){
                         $(".modal-body").html(html);
                     }   

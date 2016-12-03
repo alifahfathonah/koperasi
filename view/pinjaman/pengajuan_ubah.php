@@ -55,3 +55,12 @@ $d  = $pinjaman->bacapengajuan($id_pin);
             <input type="text" class="form-control" name="ket" value="<?php echo $d['ket']; ?>" required>
             <input type="hidden" class="form-control" name="acc" value="N" required>
           </div>
+            <div class="form-group">
+            <label for="recipient-name" class="control-label">Status</label>
+            <select class="form-control" name="status" required>
+            <option value="<?php echo $d['status']; ?>"><?php echo $d['status']; ?></option>
+            <option value="LUNAS">LUNAS</option>
+            <option value="PROSES">PROSES</option>
+            <option value="BATAL">BATAL</option>
+            </select>
+          </div>

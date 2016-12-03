@@ -4,71 +4,92 @@ include'../../class/function.php';
 $db = new Database();
 $db->connectMySQL();
 $pinjaman = new pinjaman();
+$angsuran = new angsuran();
+$d  = $pinjaman->bacapengajuan($id_pin);
 ?>
-<script type="text/javascript">
-var d = document.getElementById("myLink");
-d.className = d.className + " disabled";
-</script>
- <table id="example" class="table table-hover">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="print">
+  <tr>
+    <td width="20%"><strong>No Pinjaman</strong></td>
+    <td width="3%">:</td>
+    <td width="77%"><?php echo $d['id_pin']; ?></td>
+  </tr>
+   <tr>
+    <td><strong>Nama </strong></td>
+    <td>:</td>
+    <td><strong><?php echo $d['nama']; ?> / <?php echo $d['id_anggota']; ?></td>
+    </tr>
+  <tr>
+    <td><strong>Tanggal</strong></td>
+    <td>:</td>
+    <td><?php echo DateToIndo($d['tgl_pin']); ?></td>
+    </tr>
+      <tr>
+  <tr>
+    <td><strong>Jumlah </strong></td>
+    <td>:</td>
+    <td><?php echo rupiah($d['jumlah_acc']); ?></td>
+  </tr>
+      <td><strong>Terbilang</strong></td>
+    <td>:</td>
+    <td><?php echo terbilang($d['jumlah_acc']); ?></td>
+    </tr>
+</table>
+<hr />
+<div class="row">
+  <div class="col-md-6"><table class="table table-hover">
     <thead>
       <tr>
-        <th class="success">ACTION</th>
-        <th class="success">ID PIN</th>
-        <th class="success">ID ANGGOTA</th>
-        <th class="success">NAMA ANGGOTA</th>
-        <th class="success">TGL PIN</th>
-        <th class="success">JUMLAH </th>
-        <th class="success">JUMLAH ACC</th>
-        <th class="success">JUMLAH POT</th>
-        <th class="success">JUMLAH ADM</th>
-        <th class="success">KET</th>
-        <th class="success">APRROVE</th>
-        <th class="success">STATUS</th>
+       
+        <th class="info">NO</th>
+        <th class="info">TANGGAL</th>
+        <th class="info">JUMLAH</th>
+        <th class="info">SISA</th>
+        <th class="info">KET</th>
+        <th class="info">AKSI</th>
       </tr>
     </thead>
     <tbody>
          <?php
-      $arraypinjaman=$pinjaman->showpengajuan();
-      if (count($arraypinjaman)) {
-      foreach($arraypinjaman as $d) {
-        if($d['acc']=='Y'){
-                  $a='Approve';
-                  $b='success';
-                  $c='disabled';
-                  }else if($d['acc']=='N'){
-                  $a='Not App';
-                  $b='warning';
-                  $c='';
-                }
+      $arrayangsuran=$angsuran->showangsuran();
+      if (count($arrayangsuran)) {
+      foreach($arrayangsuran as $da) {
+        $jumlah+=$da['jum_ang'];
+                
     ?>
       <tr>
-        <td>
-          <a class="btn btn-success btn-xs" href="?r=laporan&pg=cetak_pengajuan&id_pin=<?php echo $d['id_pin'] ?>" role="button">Print</a>
-          <a class="btn btn-info btn-xs ubah-pengajuan <?php echo $c; ?>" data-id="<?php echo $d['id_pin'];?>" href="" role="button">Edit</a>
-          
-          </td>
-        <td><?php echo $d['id_pin']; ?></td>
-        <td><?php echo $d['id_anggota']; ?></td>
-        <td><?php echo $d['nama']; ?></td>
-        <td><?php echo DateToIndo($d['tgl_pin']); ?></td>
-        <td><?php echo rupiah($d['jumlah']); ?></td>
-        <td><?php echo rupiah($d['jumlah_acc']); ?></td>
-        <td><?php echo rupiah($d['jumlah_pot']); ?></td>
-        <td><?php echo rupiah($d['jumlah_adm']); ?></td>
-        <td><?php echo $d['ket']; ?></td>
-        <td><a class="btn btn-<?php echo $b; ?> btn-xs approve-pengajuan <?php echo $c; ?>" data-id="<?php echo $d['id_pin']; ?>" href="" role="button"><?php echo $a; ?></a></td>       
-        <td><?php echo $d['status']; ?></td>
-      </tr>
+        <td><?php echo $c=$c+1;?></td>
+        <td><?php echo DateToIndo($da['tgl_ang']); ?></td>
+        <td><?php echo rupiah($da['jum_ang']); ?></td>
+        <td></td>
+        <td><?php echo $da['ket']; ?></td>
+        <td><button type="button" class="btn btn-success btn-xs ubah-angsuran" data-id="<?php echo $da['id_pin']; ?>">
+          <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+          </button></td>
+        </tr>
       <?php 
   }
 }
 ?>
     </tbody>
-  </table>
- <a class="btn btn-success btn-xs add-pengajuan" href="?r=fpk&pg=fpk_form" role="button">Tambah Data</a>
+    <thead>
+      <tr>
+       
+        <th class="info"></th>
+        <th class="info">JUMLAH</th>
+        <th class="info"><?php echo rupiah($jumlah); ?></th>
+        <th class="info"><?php echo rupiah($sisa=$d['jumlah_acc']-$jumlah); ?></th>
+        <th class="info"></th>
+        <th class="info"></th>
+      </tr>
+    </thead>
+  </table></div>
+  <div class="col-md-6"></div>
+</div>
+ 
+ <a class="btn btn-success btn-xs add-angsuran" href="" data-id="<?php echo $d['id_pin']; ?>" role="button">Tambah</a>
 <!-- MODAL FORM SUPPLIER -->
-<div class="modal fade" id="modal-pengajuan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+<div class="modal fade" id="modal-add-angsuran" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
               <form action="" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -78,26 +99,20 @@ d.className = d.className + " disabled";
                     <div class="modal-body">
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" name="simpan" value="Simpan" class="btn btn-success" >
+                        <input type="submit" name="simpan_angsuran" value="Simpan" class="btn btn-success" >
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         
                     </div>
                 </div>
                 </form>
 <?php
- if($_POST['simpan']){
-  $pinjaman->addpengajuan(
+ if($_POST['simpan_angsuran']){
+  $angsuran->addangsuran(
+  $_POST['id_ang'],
   $_POST['id_pin'],  
-  $_POST['id_anggota'],
-  $_POST['tgl_pin'],
-  $_POST['tgl_acc'],
-  $_POST['jumlah'],
-  $_POST['jumlah_acc'],
-  $_POST['jumlah_pot'],
-  $_POST['jumlah_adm'],
-  $_POST['ket'],
-  $_POST['acc']);
-  echo"<meta http-equiv='refresh' content='0;url=?r=pinjaman&pg=pengajuan'>";
+  $_POST['tgl_ang'],
+  $_POST['jum_ang'],
+  $_POST['ket']);
  }
 ?>
             </div>

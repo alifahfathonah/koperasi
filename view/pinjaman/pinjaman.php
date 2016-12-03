@@ -12,23 +12,23 @@ d.className = d.className + " disabled";
  <table id="example" class="table table-hover">
     <thead>
       <tr>
-        <th class="success">ACTION</th>
-        <th class="success">ID PIN</th>
-        <th class="success">ID ANGGOTA</th>
-        <th class="success">NAMA ANGGOTA</th>
-        <th class="success">TGL PIN</th>
-        <th class="success">JUMLAH </th>
-        <th class="success">JUMLAH ACC</th>
-        <th class="success">JUMLAH POT</th>
-        <th class="success">JUMLAH ADM</th>
-        <th class="success">KET</th>
-        <th class="success">APRROVE</th>
-        <th class="success">STATUS</th>
+       
+        <th class="info">ID PIN</th>
+        <th class="info">ID ANGGOTA</th>
+        <th class="info">NAMA ANGGOTA</th>
+        <th class="info">TGL PIN</th>
+        <th class="info">JUMLAH </th>
+        <th class="info">JUMLAH ACC</th>
+        <th class="info">JUMLAH POT</th>
+        <th class="info">SISA POT</th>
+        <th class="info">KET</th>
+        <th class="info">APRROVE</th>
+        <th class="info">STATUS</th>
       </tr>
     </thead>
     <tbody>
          <?php
-      $arraypinjaman=$pinjaman->showpengajuan();
+      $arraypinjaman=$pinjaman->showpinjam();
       if (count($arraypinjaman)) {
       foreach($arraypinjaman as $d) {
         if($d['acc']=='Y'){
@@ -42,19 +42,17 @@ d.className = d.className + " disabled";
                 }
     ?>
       <tr>
-        <td>
-          <a class="btn btn-success btn-xs" href="?r=laporan&pg=cetak_pengajuan&id_pin=<?php echo $d['id_pin'] ?>" role="button">Print</a>
-          <a class="btn btn-info btn-xs ubah-pengajuan <?php echo $c; ?>" data-id="<?php echo $d['id_pin'];?>" href="" role="button">Edit</a>
-          
-          </td>
         <td><?php echo $d['id_pin']; ?></td>
         <td><?php echo $d['id_anggota']; ?></td>
-        <td><?php echo $d['nama']; ?></td>
+        <td><a href="?r=angsuran&pg=angsuran&id_pin=<?php echo $d['id_pin']; ?>&id_anggota=<?php echo $d['id_anggota']; ?>"><?php echo $d['nama']; ?></a></td>
         <td><?php echo DateToIndo($d['tgl_pin']); ?></td>
         <td><?php echo rupiah($d['jumlah']); ?></td>
-        <td><?php echo rupiah($d['jumlah_acc']); ?></td>
-        <td><?php echo rupiah($d['jumlah_pot']); ?></td>
-        <td><?php echo rupiah($d['jumlah_adm']); ?></td>
+        <td class="info"><?php echo rupiah($d['jumlah_acc']); ?></td>
+        <td class="success">  <button type="button" class="btn btn-success btn-xs d-supplier" data-id="<?php echo $d['id_supp']; ?>">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>&nbsp;<?php echo rupiah($d['jumlah_pot']); ?>
+        </td>
+        <td class="danger"><?php echo rupiah($d['jumlah_adm']); ?></td>
         <td><?php echo $d['ket']; ?></td>
         <td><a class="btn btn-<?php echo $b; ?> btn-xs approve-pengajuan <?php echo $c; ?>" data-id="<?php echo $d['id_pin']; ?>" href="" role="button"><?php echo $a; ?></a></td>       
         <td><?php echo $d['status']; ?></td>
@@ -65,7 +63,7 @@ d.className = d.className + " disabled";
 ?>
     </tbody>
   </table>
- <a class="btn btn-success btn-xs add-pengajuan" href="?r=fpk&pg=fpk_form" role="button">Tambah Data</a>
+ 
 <!-- MODAL FORM SUPPLIER -->
 <div class="modal fade" id="modal-pengajuan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

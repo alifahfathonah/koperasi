@@ -90,6 +90,15 @@
       $hasil=mysql_query($query);
     }
       function showpinjam(){
+    $query = mysql_query("SELECT a.*, b.* FROM pinjaman a, anggota b WHERE a.id_anggota=b.id_anggota AND acc='Y'");
+    while($row=mysql_fetch_array($query))
+      $data[]=$row;
+    if(isset($data)){
+      return $data;
+    }
+ }
+
+        function showpengajuan(){
     $query = mysql_query("SELECT a.*, b.* FROM pinjaman a, anggota b WHERE a.id_anggota=b.id_anggota");
     while($row=mysql_fetch_array($query))
       $data[]=$row;
@@ -106,20 +115,20 @@
         return $data;
       }
     }
-    function updatepengajuan($id_pin,$id_anggota,$tgl_pin,$tgl_acc,$jumlah,$jumlah_acc,$jumlah_pot,$jumlah_adm,$ket,$acc){
+    function updatepengajuan($id_pin,$id_anggota,$tgl_pin,$tgl_acc,$jumlah,$jumlah_acc,$jumlah_pot,$jumlah_adm,$ket,$acc,$status){
       $query=mysql_query("UPDATE pinjaman SET id_anggota='$id_anggota', tgl_pin='$tgl_pin', tgl_acc='$tgl_acc', jumlah='$jumlah', jumlah_acc='$jumlah_acc',
-                                 jumlah_pot='$jumlah_pot', jumlah_adm='$jumlah_adm', ket='$ket', acc='$acc' WHERE id_pin='$id_pin'");
+                                 jumlah_pot='$jumlah_pot', jumlah_adm='$jumlah_adm', ket='$ket', acc='$acc', status='$status' WHERE id_pin='$id_pin'");
     }
 }
-class Harga {
-   function addharga($id_mat,$harga,$note,$date_up)
+class Angsuran {
+   function addangsuran($id_ang,$id_pin,$tgl_ang,$jum_ang,$ket)
     {
-      $query="INSERT INTO harga (id_mat,harga,note,date_up)
-      VALUES('$id_mat','$harga','$note','$date_up')";
+      $query="INSERT INTO angsuran (id_ang,id_pin,tgl_ang,jum_ang,ket)
+      VALUES('$id_ang','$id_pin','$tgl_ang','$jum_ang','$ket')";
       $hasil=mysql_query($query);
     }
-        function showharga($id_mat){
-    $query = mysql_query("SELECT a.* FROM harga a WHERE a.id_mat='$_GET[id_mat]'");
+        function showangsuran($id_pin){
+    $query = mysql_query("SELECT a.* FROM angsuran a WHERE a.id_pin='$_GET[id_pin]'");
     while($row=mysql_fetch_array($query))
       $data[]=$row;
     if(isset($data)){

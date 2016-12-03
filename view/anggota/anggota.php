@@ -14,8 +14,6 @@ $anggota = new anggota();
         <th>NO KTP</th>
         <th>TMPT LAHIR</th>
         <th>TGL LAHIR</th>
-        <th>ALAMAT</th>
-        
         <th>KOORDINATOR</th>
         <th>TELPON</th>
         
@@ -42,9 +40,6 @@ $anggota = new anggota();
           </button>
           <?php echo $d['nama']; ?></td>
         <td>
-          <button type="button" class="btn btn-info btn-xs">
-          <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-          </button>
           <?php echo $d['ktp']; ?></td>
         <td>
           <button type="button" class="btn btn-info btn-xs">
@@ -52,7 +47,7 @@ $anggota = new anggota();
           </button>
           <?php echo $d['tmpt_lahir']; ?></td>
         <td><?php echo $d['tgl_lahir']; ?></td>
-        <td><?php echo $d['alamat']; ?></td>
+        
         <td><?php echo $d['kordinator']; ?></td>
         <td><?php echo $d['telpon']; ?></td>
         <td>

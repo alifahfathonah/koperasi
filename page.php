@@ -30,6 +30,7 @@ header("location:login.php");
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/dataTables.bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/dataTables.tableTools.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap/custom_hendri.css">
 	
 	<script type="text/javascript" language="javascript" src="bootstrap/js/jquery-1.11.3.js"></script>
 	<script type="text/javascript" language="javascript" src="bootstrap/js/jquery.dataTables.js"></script>
@@ -169,13 +170,12 @@ $(document).ready(function() {
 <div class="container-fluid">
     <br>
 <br>
-<br>
-<a href="page.php"><img src="images/logo.jpg" width="100"></a>
+<h1><strong>[KOPERASI-PINJAMAN]</strong></h1>
 <hr>
   
 		 <?php
                                 if (!isset($_GET['r'])){
-                                    include('view/material/material.php');
+                                    include('view/pinjaman/pinjaman.php');
                                 }else{
                                     $r  = $_GET['r'];
                                     $pg = $_GET['pg'];
@@ -186,7 +186,7 @@ $(document).ready(function() {
 <footer>
       <div class="container-fluid">
         <hr>
-        <p class="text-muted">Copyright &copy;hendrimamang@gmail.com <?php echo date('Y'); ?></p>
+        <p class="text-muted"><kbd>Copyright &copy;hendrimamang@gmail.com <?php echo date('Y'); ?></kbd></p>
        
       </footer>
       <hr>

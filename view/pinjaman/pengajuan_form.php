@@ -24,7 +24,8 @@ $pinjaman = new pinjaman();
              
             </select>
           </div>
-            <div class="form-group">
+          
+            <div class="form-group ">
             <label for="recipient-name" class="control-label">Tanggal</label>
             <input type="text" class="form-control" name="tgl_pin" value="<?php echo date('Y-m-d'); ?>" required>
           </div>
