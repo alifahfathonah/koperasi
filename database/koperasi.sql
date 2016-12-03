@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2016 at 11:39 AM
+-- Generation Time: Dec 03, 2016 at 01:37 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -43,15 +43,21 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 --
 
 INSERT INTO `anggota` (`id_anggota`, `nama`, `ktp`, `tmpt_lahir`, `tgl_lahir`, `alamat`, `kordinator`, `telpon`, `date_input`) VALUES
-('9205000001', 'Hendri Yulianto', '3671081405920004', 'Tangerang', '1992-05-14', 'Kp. Gebang RT. 02/02 Kel. Sangiang jaya Periuk Tangerang', 'Sofyan', '1992051458', '2016-10-24'),
-('9205000002', 'Faisal', '3671081405920004', 'Tangerang', '1992-05-14', 'Kp. Gebang RT. 02/02 Kel. Sangiang jaya Periuk Tangerang', 'Slamet', '0219502547', '2016-10-24'),
-('9205000003', 'Sukarmin ', '3671081405920004', 'Rejo Agung', '1992-05-12', 'Kp. Gebang RT. 02/02 Kel. Sangiang jaya Periuk Tangerang', 'Sofyan', '085715887705', '2016-10-24'),
-('9205000004', 'Maryadi', '3671081405920004', 'Jakarta', '1992-05-16', 'JL. ASIJAH NO. 45 KP. GEBANG KEL. SANGIANG JAYA KEC. PERIUK KOTA TANGERANG', 'Sofyan', '02159309136', '2016-10-24'),
-('9205000005', 'Budi Darsono', '3671081405920004', 'Jakarta', '1992-05-16', 'KP. SEPATAN WETAN RT.002/002 KEL. PONDOK JAYA SEPATAN', 'Saini', '02159309136', '2016-10-24'),
-('9205000006', 'Luther Laa', '3671081405920004', 'Penelat', '1988-08-14', 'Tangerang', 'Nurhadi', '02159309136', '2016-10-27'),
-('9205000007', 'Sofyan Adi', '3671081405920004', 'Solo', '1988-08-14', 'Kp. Gebang RT. 002/002', 'Sofyan', '02159309136', '2016-10-27'),
-('9205000008', 'Efuul', '3671081405920004', 'Jakarta', '2016-05-14', 'Kp. Gebang RT. 02/02 Kel. Sangiang jaya Periuk Tangerang', 'Efuul', '0219502547', '2016-10-28'),
-('9205000009', 'Suherman', '36710814059200042', 'Tangerang', '1992-05-14', 'Kp. Gebang RT. 02/02 Kel. Sangiang jaya Periuk Tangerang', 'Sofyan', '085715887704', '2016-10-28');
+('9205000001', 'Wanto', '-', '-', '0000-00-00', '-', 'Lasiman', '-', '2016-12-03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `angsuran`
+--
+
+CREATE TABLE IF NOT EXISTS `angsuran` (
+  `id_ang` varchar(5) NOT NULL,
+  `id_pin` varchar(10) NOT NULL,
+  `tgl_ang` date NOT NULL,
+  `jum_ang` double NOT NULL,
+  `ket` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -80,7 +86,7 @@ INSERT INTO `menu` (`id_menu`, `title`, `folder`, `link`, `level`, `parent`, `ic
 (4, 'Data Pinjaman', 'pinjaman', 'pinjaman', 'DIVISI', 1, 'glyphicon glyphicon-send', 2),
 (7, 'Master', 'Master', '#', 'HRD', 0, 'glyphicon glyphicon-link', 1),
 (8, 'menu', 'menu', 'menu', 'HRD', 7, 'glyphicon glyphicon-paperclip', 0),
-(9, 'Data Angusran', 'angsuran', 'angsuran', 'HRD', 1, 'glyphicon glyphicon-shopping-cart', 3),
+(9, 'Data Angusran', 'angsuran', 'angsuran', 'HRD', 11, 'glyphicon glyphicon-shopping-cart', 3),
 (10, 'Data Pengajuan', 'pinjaman', 'pengajuan', 'HRD', 1, 'glyphicon glyphicon-link', 1),
 (11, 'Report', '#', '#', 'HRD', 0, 'glyphicon glyphicon-print', 3),
 (12, 'Mutasi Koperasi', 'laporan', 'mutasi', 'HRD', 11, 'glyphicon glyphicon-stats', 1);
@@ -110,11 +116,7 @@ CREATE TABLE IF NOT EXISTS `pinjaman` (
 --
 
 INSERT INTO `pinjaman` (`id_pin`, `id_anggota`, `tgl_pin`, `tgl_acc`, `jumlah`, `jumlah_acc`, `jumlah_pot`, `jumlah_adm`, `ket`, `acc`, `status`) VALUES
-('0514000001', '9205000001', '2016-10-23', '0000-00-00', 10500000, 10500000, 1000000, 20000, '-', 'Y', 'PROSES'),
-('0514000002', '9205000002', '2016-10-24', '0000-00-00', 5000000, 1000000, 100000, 50000, '-', 'Y', 'PROSES'),
-('0514000003', '9205000003', '2016-10-24', '0000-00-00', 5000000, 5000000, 500000, 100000, '-', 'N', 'PROSES'),
-('0514000004', '9205000004', '2016-10-24', '0000-00-00', 10000000, 5000000, 1000000, 0, '-', 'N', 'PROSES'),
-('0514000005', '9205000009', '2016-10-28', '0000-00-00', 200000, 200000, 100000, 0, 'Acc', 'N', '');
+('0514000001', '9205000001', '2016-12-03', '0000-00-00', 300000, 300000, 100000, 15000, '-', 'N', '');
 
 -- --------------------------------------------------------
 
@@ -149,6 +151,12 @@ INSERT INTO `user` (`user_id`, `nm_lengkap`, `email`, `telp`, `level`, `date_reg
 --
 ALTER TABLE `anggota`
  ADD PRIMARY KEY (`id_anggota`);
+
+--
+-- Indexes for table `angsuran`
+--
+ALTER TABLE `angsuran`
+ ADD PRIMARY KEY (`id_ang`);
 
 --
 -- Indexes for table `menu`
